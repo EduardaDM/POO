@@ -1,0 +1,43 @@
+package Lista01;
+
+/*
+ * QUESTAO 1 = Calcular imc de uma pessoa que tem 1.75 e 78kg
+ * QUESTAO 2 = Implemente um novo programa (classe App) que
+ * solicite ao usuário sua altura e peso e exiba na tela qual 
+ * é o IMC desta pessoa. 
+ * QUESTAO 3 = Adapte e desenhe o diagrama de classes
+ * para criar um programa que solicite ao usuário o nome, altura e 
+ * peso de três pessoas Depois que o usuário informar os dados das 
+ * três pessoas. exiba os dados informados pelo usuário (nome, peso, 
+ * altura) e seu respectivo IMC em ordem inversa de digitação  isto 
+ * é, exibir primeiro os dados da terceira pessoa e por último da primeira pessoa
+ */
+
+public class Pessoa {
+    
+    private double altura;
+    private double peso;
+
+    public Pessoa(double altura, double peso) {
+        this.altura = altura;
+        this.peso = peso;
+    }
+
+    public double calcularImc() {
+        return peso / (altura * altura);
+    }
+
+    public double getAltura() {
+        return altura;
+    }
+    public void setAltura(double altura) {
+        this.altura = altura;
+    }
+
+    public double getPeso() {
+        return peso;
+    }
+    public void setPeso(double peso) {
+        this.peso = peso;
+    }
+}

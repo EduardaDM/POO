@@ -1,0 +1,42 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package model;
+
+import javax.swing.JOptionPane;
+
+/**
+ *
+ * @author duda
+ */
+public class Teste {
+
+    public Teste() {
+        try {
+            Pessoa p1 = new Pessoa();
+            //Pessoa p = new Pessoa(""); //--> gera a exceção.
+            Pessoa p2 = new Pessoa("Luciana");
+            Pessoa p3 = new Pessoa("Luciana", "Kohler");
+
+            JOptionPane.showMessageDialog(null, p1.getNome() + " " + p1.getSobrenome());
+            JOptionPane.showMessageDialog(null, p2.getNome() + " " + p2.getSobrenome());
+            JOptionPane.showMessageDialog(null, p3.getNome() + " " + p3.getSobrenome());
+            
+            String lista = "";
+            //for (...) {
+               lista += p1.getNome() + " " + p1.getSobrenome() + "\n";
+            //}
+            lista += p2.getNome() + " " + p2.getSobrenome() + "\n";
+            lista += p3.getNome() + " " + p3.getSobrenome();
+            
+            JOptionPane.showMessageDialog(null, lista);
+        } catch (IllegalArgumentException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+    }
+
+    public static void main(String[] args) {
+        new Teste();
+    }
+}

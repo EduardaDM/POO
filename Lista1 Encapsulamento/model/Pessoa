@@ -1,0 +1,48 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ */
+
+package model;
+
+/**
+ *
+ * @author duda
+ */
+public class Pessoa {
+
+    private String nome;
+    private String sobrenome;
+    
+    public Pessoa(){
+        
+    }
+    
+    public Pessoa(String nome, String sobrenome) throws IllegalArgumentException{
+        setNome(nome);
+        setSobrenome(sobrenome);
+    }
+    
+    public Pessoa(String nome) throws IllegalArgumentException{
+        setNome(nome);
+    }
+    
+    public void setNome(String nome) throws IllegalArgumentException{
+        if (nome == null || nome.trim().equals("")) {
+            throw new IllegalArgumentException("Nome não pode ser vazio");
+        }
+        this.nome = nome;
+    }
+    
+    public void setSobrenome(String sobrenome) {
+        this.sobrenome = sobrenome;
+    }
+    
+    public String getNome() {
+        return nome;
+    }
+    
+    public String getSobrenome() {
+        return sobrenome;
+    }
+    
+}

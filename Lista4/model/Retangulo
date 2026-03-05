@@ -1,0 +1,77 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package modelo;
+
+/**
+ *
+ * @author duda
+ */
+public class Retangulo {
+    
+    private int altura;
+    private int comprimento;
+   
+    /**
+     * Cria uma instância de um retângulo vazio
+     */
+    public Retangulo() {}
+//        altura = 0;
+//        comprimento = 0;
+    
+    /**
+     * Cria uma instãncia de um retângulo com valores definidos
+     * 
+     * @param altura valor da altura do retângulo
+     * @param comprimento valor do comprimento do retângulo
+     * @throws IllegalArgumentException valores não podem ser negativos, nem 0.
+     */
+    public Retangulo(int altura, int comprimento) throws IllegalArgumentException{
+        setAltura(altura);
+        
+        setComprimento(comprimento);
+    }
+    
+    public void setAltura(int altura) throws IllegalArgumentException{
+        if (altura <= 0) {
+            throw new IllegalArgumentException("Valor incorreto para a "
+                    + "altura: " + altura);
+        }
+        
+        this.altura = altura;
+    }
+    
+    public int getAltura() {
+        return altura;
+    }
+    
+    public void setComprimento(int comprimento) throws IllegalArgumentException{
+        if (comprimento <= 0) {
+            throw new IllegalArgumentException("Valor incorreto para o "
+                    + "comprimento: " + comprimento);
+        }
+        this.comprimento = comprimento;       
+    }
+    
+    public int getComprimento() {
+        return comprimento;
+    }
+    
+    /**
+     * Calcula o perímetro do retângulo
+     * @return perímetro
+     */
+    public int calcularPerimetro() {
+        return (altura + altura + comprimento + comprimento);
+    }
+    
+    /**
+     * Calcula a área do retângulo
+     * @return área
+     */
+    public int calcularArea() {
+        return altura * comprimento;
+    }
+}
+

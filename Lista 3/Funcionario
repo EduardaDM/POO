@@ -1,0 +1,122 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package lista3;
+//questao 2
+
+import javax.swing.JOptionPane;
+
+/**
+ *
+ * @author duda
+ */
+public class Funcionario {
+    private String nome = "a";
+    private double salario = 0;
+    private double imposto;
+
+    public Funcionario(String nome, double salario) throws IllegalArgumentException {
+        setNome(nome);
+        setSalario(salario);
+        calcularIrpf();
+    }
+    
+    public Funcionario (){
+       Funcionario vetor [] = new Funcionario[5];
+       boolean erro = true;
+       for(int i = 0; i < 5; i ++){
+           Funcionario novo = new Funcionario(nome, salario);
+           do{    
+               try{
+                   novo.setNome(JOptionPane.showInputDialog("Nome do funcionário: "));
+                   erro = false;
+               }catch (IllegalArgumentException e){
+                   JOptionPane.showMessageDialog(null, e.getMessage());
+               }
+           }while(erro);
+           erro = true;
+           do{    
+               try{
+                   novo.setSalario(Double.parseDouble(JOptionPane.showInputDialog("Salário do Funcionário: " )));
+                   novo.calcularIrpf();
+                   erro = false;
+               }catch (IllegalArgumentException e){
+                   JOptionPane.showMessageDialog(null, e.getMessage());
+               }
+           }while(erro);
+           vetor[i] = novo;
+       }
+       
+       for(int u = 0; u < 5; u++){
+           JOptionPane.showMessageDialog(null, "funcionário: " + vetor[u].getNome() + "\nImposto: " + vetor[u].getImposto()); 
+       }
+
+       //perguntar se há como imprimir em lista com JOptionPane
+       
+   }
+    String getNome(){
+
+        return nome;
+    }
+    
+    void setNome(String nome){
+       if(nome == null || nome.trim().equals("")){
+           throw new IllegalArgumentException ("O nome não pode ser nulo");
+       }         
+       this.nome = nome;
+    }
+    
+    double getSalario(){
+        return salario;        
+    }
+    
+    void setSalario(double salario){
+       if(salario < 0){
+           throw new IllegalArgumentException ("O salário não pode ser menor do que zero");
+       }  
+        this.salario = salario;
+    }    
+    
+   double getImposto(){
+       return imposto;
+   }
+   
+   void setImposto(double imposto){
+       this.imposto = imposto;
+   }
+    
+    void calcularIrpf(){        
+        if(getSalario() >= 4664.69){
+            setImposto(faixa5());
+        }else if(getSalario() >= 3751.06 && getSalario() <= 4664.68){
+            setImposto(faixa4());
+        }else if(getSalario() >= 2826.66 && getSalario() <= 3751.05){
+            setImposto(faixa3());
+        }else if(getSalario() >= 1903.99 && getSalario() <= 2826.65){
+            setImposto(faixa2());
+        }else{
+            setImposto(0);
+        }
+    }
+    
+    double faixa5(){
+        return (getSalario() - 4664.68)*0.275 + 205.56675 + 138.66 + 69.90;
+    }
+
+    double faixa4(){
+        return (getSalario() - 3751.05)*0.225 + 138.66 + 69.90;
+    }
+    
+    double faixa3(){
+        return (getSalario() - 2826.65)*0.15 + 69.90;
+    }
+    
+    double faixa2(){
+        return (getSalario() - 1903.98)*0.075;
+    }
+    
+    public static void main(String[] args){
+       new Funcionario();
+   }
+}

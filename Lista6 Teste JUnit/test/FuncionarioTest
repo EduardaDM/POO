@@ -1,0 +1,156 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/UnitTests/JUnit5TestClass.java to edit this template
+ */
+package model;
+
+import controle.FaixaIRPF;
+import controle.Funcionario;
+import java.text.DecimalFormat;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
+/**
+ *
+ * @author emazureck
+ */
+public class FuncionarioTest {
+    
+    private static Funcionario f;
+    private static DecimalFormat df;
+
+    
+    public FuncionarioTest() {
+    }
+    
+    @BeforeAll
+    public static void setUpClass() {
+        f = new Funcionario("F1", 3751.06);
+        df = new DecimalFormat("0.00"); 
+    }
+    
+    @Test
+    public void teste01() {
+        //Verificar se um salário é categorizado
+        //corretamente como sendo de primeira faixa
+        //Entrada: Salário = 850,00
+        //Saída: identificarFaixaIrpf() = FaixaIrpf.PRIMEIRA
+        
+//        Funcionario f = new Funcionario("F1", 850);
+//        if (f.identificarFaixaIRPF() == FaixaIRPF.PRIMEIRA) {
+//            System.out.println("SIM");
+//        }
+        f.setSalario(850);
+        assertEquals(f.identificarFaixaIrpf(), FaixaIrpf.PRIMEIRA);
+    }
+    
+    @Test
+    public void teste2() {
+         f.setSalario(850);
+         df = new DecimalFormat("0.00");
+        assertEquals(f.calcularIrpf(), "0,00");
+    }
+    
+    @Test
+    public void teste3() {
+        f.setSalario(1903.98);
+        assertEquals(f.identificarFaixaIrpf(), FaixaIrpf.PRIMEIRA);
+    }
+    
+    @Test
+    public void teste4() {
+         f.setSalario(1903.98);
+         df = new DecimalFormat("0.00");
+        assertEquals(f.calcularIrpf(), "0,00");
+    }
+    
+    public void teste5() {
+        f.setSalario(1903.99);
+        assertEquals(f.identificarFaixaIrpf(), FaixaIrpf.SEGUNDA);
+    }
+    
+    @Test
+    public void teste6() {
+         f.setSalario(1903.99);
+         df = new DecimalFormat("0.00");
+        assertEquals(f.calcularIrpf(), "0,00");
+    }
+    
+    public void teste7() {
+        f.setSalario(2000);
+        assertEquals(f.identificarFaixaIrpf(), FaixaIrpf.SEGUNDA);
+    }
+    
+    @Test
+    public void teste8() {
+        f.setSalario(2000);
+        df = new DecimalFormat("0.00");
+        assertEquals(df.format(f.calcularIrpf()), "7,20");
+    }
+    
+    public void teste9() {
+        f.setSalario(2826.65);
+        assertEquals(f.identificarFaixaIrpf(), FaixaIrpf.SEGUNDA);
+    }
+    
+    @Test
+    public void teste10() {
+        f.setSalario(2000);
+        df = new DecimalFormat("0.00");
+        assertEquals(df.format(f.calcularIrpf()), "69,20");
+    }
+    
+    @Test
+    public void teste18(){
+        //Verificar se o imposto é calculado
+        //corretamente para um salário de quarta faixa
+        //Entrada Salário = 3751,06 
+        //saída: calcularIrpf() = 207.86
+        //Funcionario f = new Funcionario("F1", 3751.06);
+//        if (f.calcularIrpf() == 207.86) {
+//            //....
+//        }
+        //DecimalFormat df = new DecimalFormat("0.00");
+        f.setSalario(3751.06);
+        df = new DecimalFormat("0.00");
+        assertEquals(df.format(f.calcularIrpf()), "207,86");   
+    }
+    
+    @Test
+    public void impostoFaixa(){
+        f = new Funcionario("Duda",850);
+        df = new DecimalFormat("0.00");
+        assertEquals(df.format(f.calcularIrpf()), "7.20");
+    }
+    
+    
+    @AfterAll
+    public static void tearDownClass() {
+    }
+    
+    @BeforeEach
+    public void setUp() {
+    }
+    
+    @AfterEach
+    public void tearDown() {
+    }
+
+
+    /**
+     * Test of calcularIrpf method, of class Funcionario.
+     */
+    @Test
+    public void testCalcularIrpf() {
+        System.out.println("calcularIrpf");
+        double expResult = 0.0;
+        double result = f.calcularIrpf();
+        assertEquals(expResult, result, 0);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+}

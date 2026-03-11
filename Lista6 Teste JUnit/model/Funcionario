@@ -1,0 +1,101 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ */
+
+package model;
+
+/**
+ *Representa um funcionário para calcular o IRPF e identificar a faixa.
+ * 
+ * @author Duda
+ */
+public class Funcionario {
+    private String nome;
+    private double salario;
+
+    
+    public Funcionario(String nome, double salario) {
+        setNome(nome);
+        setSalario(salario);
+    }
+    
+    public void setNome(String nome)throws IllegalArgumentException{
+        if(nome == null || nome.trim().equals("")){
+            throw new IllegalArgumentException("Nome não pode ser vazio");
+        }
+        this.nome=nome;
+    }
+    
+    public void setSalario(double salario)throws IllegalArgumentException{
+        if(salario == 0){
+            throw new IllegalArgumentException("Salário inválido");
+        }
+        else if(salario <=0){
+            throw new IllegalArgumentException("Salário deve ser maior que Zero"); 
+        }
+        this.salario=salario;
+    }
+    
+    public String getNome(){
+        return nome;
+    }
+    
+    public double getSalario(){
+        return salario;
+    }   
+    
+     /**
+     * cálculo do imposto de renda
+     * 
+     * @return valor do IRPF a pagar
+     */
+    public double calcularIrpf(){        
+        double imposto = 0;        
+        switch (identificarFaixaIrpf()) {
+            case FaixaIrpf.QUINTA:
+                double diferenca = salario - 4664.68;
+                imposto += (diferenca * (27.5) / 100);
+            case FaixaIrpf.QUARTA:
+                if (identificarFaixaIrpf() == FaixaIrpf.QUARTA) {
+                    diferenca = salario - 3751.05;
+                } else {
+                    diferenca = 4664.68 - 3751.05;
+                }
+                imposto += diferenca * (22.5 / 100);
+            case FaixaIrpf.TERCEIRA:
+                if (identificarFaixaIrpf() == FaixaIrpf.TERCEIRA) {
+                    diferenca = salario - 2826.65;
+                } else {
+                    diferenca = 3751.05 - 2826.65;
+                }
+                imposto += diferenca * (15.0 / 100);
+            case FaixaIrpf.SEGUNDA:
+                if (identificarFaixaIrpf() == FaixaIrpf.SEGUNDA) {
+                    diferenca = salario - 1903.98;
+                } else {
+                    diferenca = 2826.65 - 1903.98;
+                }
+                imposto += diferenca * (7.5 / 100);
+                break;
+        }
+        return imposto;
+    }
+    
+    public FaixaIrpf identificarFaixaIrpf(){
+       if(this.salario >= 4664.69){
+            return FaixaIrpf.QUINTA;
+    }
+       else if(this.salario >= 3751.06){
+            return FaixaIrpf.QUARTA;
+        }
+       else if(this.salario >= 2826.66){
+            return FaixaIrpf.TERCEIRA;
+        }
+       else if(this.salario >= 1903.99){
+            return FaixaIrpf.SEGUNDA;
+        }
+       else{
+            return FaixaIrpf.PRIMEIRA;
+        }
+    }
+}
